@@ -1,21 +1,25 @@
 'use strict';
 
 const express = require('express');
-const cors = require('cors');
 const morgan = require('morgan');
-const errors = require('http-errors');
-const debug = require('debug')('list:server');
+const cors = require('cors');
+const errors = require('./lib/error-middleware.js');
+
 const mongoose = require('mongoose');
+const debug = require('debug')('list:server');
+const listRouter = require('./route/list-route.js');
 
-const PORT = process.env.PORT || 3000;
 const app = express();
-const MOGODB_URI = 'mongodb://localhost/gamesdb';
+const PORT = process.env.PORT || 3000;
+const MONGODB_URI = 'mongodb://localhost/gamesdb';
 
-mongoose.connect(MOGODB_URI);
+mongoose.connect(MONGODB_URI);
 
-app.use(morgan('dev'));
 app.use(cors());
+app.use(morgan('dev'));
+app.use(listRouter);
 app.use(errors);
+
 
 app.listen(PORT, () => {
   debug(`listening on ${PORT}`);
