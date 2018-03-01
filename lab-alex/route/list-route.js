@@ -35,11 +35,12 @@ listRouter.delete('/api/list/:listId', function(req, res, next) {
 });
 listRouter.put('/api/list/:listId', jsonParser, function(req, res, next) {
   debug('PUT: /api/list/:listId');
-  if (!req.params.listId) return next(createError(404, 'not found'));
-  if (!req.body.name) return next(createError(400, 'bad request'));
-
+  // if (!req._id) return next(createError(404, 'not found'));
+  if (!req.params.listId) return next(createError(400, 'bad request'));
+  
   List.findByIdAndUpdate(req.params.listId, req.body, {new: true})
     .then(list => res.json(list))
     .catch(next);
+  
 });
 
