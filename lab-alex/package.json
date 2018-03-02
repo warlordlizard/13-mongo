@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "test": "DEBUG='list*' jest",
-    "start": "DEBUG='list*' nodemon server.js"
+    "start": "DEBUG='list*' nodemon server.js",
+    "test2": "DEBUG='game*' jest list.test.js"
   },
   "keywords": [],
   "author": "",

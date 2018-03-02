@@ -135,7 +135,7 @@ describe('List Routes Using Mongo', function() {
           .send(updatedList)
           .end((err, res) => {
             expect(err).toBeTruthy();
-            // expect(res.status).toEqual(404);
+            expect(res.status).toEqual(404);
             done();
           });
       });
