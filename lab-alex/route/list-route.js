@@ -40,7 +40,9 @@ listRouter.put('/api/list/:listId', jsonParser, function(req, res, next) {
   
   List.findByIdAndUpdate(req.params.listId, req.body, {new: true})
     .then(list => res.json(list))
-    .catch(next);
-  
+    .catch(err => {
+      if (err.name === 'ValidationError') return next(err);
+      next(createError(404, err.message))
+    });
 });
 
